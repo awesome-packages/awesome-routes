@@ -1,4 +1,4 @@
-![simple-routes](https://socialify.git.ci/rhuangabrielsantos/simple-routes/image?description=1&font=Raleway&owner=1&theme=Dark)
+![simple-routes](https://socialify.git.ci/awesome-packages/simple-routes/image?description=1&font=Raleway&owner=1&theme=Dark)
 
 
 [![Total Downloads](https://img.shields.io/packagist/dt/rhuangabrielsantos/simple-routes?style=flat-square)](https://packagist.org/packages/rhuangabrielsantos/simple-routes)
@@ -15,7 +15,7 @@
 
 To install the package use the command below
 
-`composer require rhuangabrielsantos/simple-routes`
+`composer require awesome-packages/simple-routes`
 
 ## How to use
 
