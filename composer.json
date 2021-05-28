@@ -1,6 +1,6 @@
 {
   "name": "awesome-packages/awesome-routes",
-  "description": "A simple library for handling routes",
+  "description": "A awesome library for handling routes",
   "license": "MIT",
   "autoload": {
     "psr-4": {
