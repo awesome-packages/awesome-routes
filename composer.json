@@ -4,13 +4,13 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "SimpleRoutes\\": "src/"
+      "AwesomeRoutes\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
       "Mocks\\": "tests/Mock/",
-      "SimpleRoutesTests\\": "tests/src/"
+      "AwesomeRoutesTests\\": "tests/src/"
     }
   },
   "require-dev": {

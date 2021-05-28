@@ -1,11 +1,11 @@
 <?php
 
-namespace SimpleRoutes\RequestMethodsHandler;
+namespace AwesomeRoutes\RequestMethodsHandler;
 
 use Exception;
 use ReflectionException;
 use ReflectionMethod;
-use SimpleRoutes\Enum\StatusCode;
+use AwesomeRoutes\Enum\StatusCode;
 
 final class GetRequestMethodHandler implements RequestMethodHandler
 {

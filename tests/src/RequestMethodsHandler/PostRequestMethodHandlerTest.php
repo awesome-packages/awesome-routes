@@ -1,12 +1,12 @@
 <?php
 
-namespace SimpleRoutesTests\RequestMethodsHandler;
+namespace AwesomeRoutesTests\RequestMethodsHandler;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use SimpleRoutes\Enum\StatusCode;
-use SimpleRoutes\RequestMethodsHandler\GetRequestMethodHandler;
-use SimpleRoutes\RequestMethodsHandler\PostRequestMethodHandler;
+use AwesomeRoutes\Enum\StatusCode;
+use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
+use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
 
 final class PostRequestMethodHandlerTest extends TestCase
 {

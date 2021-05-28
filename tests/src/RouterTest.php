@@ -1,10 +1,10 @@
 <?php
 
-namespace SimpleRoutesTests;
+namespace AwesomeRoutesTests;
 
 use Mocks\UserController;
-use SimpleRoutes\Enum\StatusCode;
-use SimpleRoutes\Router;
+use AwesomeRoutes\Enum\StatusCode;
+use AwesomeRoutes\Router;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 

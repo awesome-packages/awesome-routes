@@ -1,11 +1,11 @@
-![simple-routes](https://socialify.git.ci/awesome-packages/awesome-routes/image?description=1&font=Raleway&owner=1&theme=Dark)
+![awesome-routes](https://socialify.git.ci/awesome-packages/awesome-routes/image?description=1&font=Raleway&owner=1&theme=Dark)
 
-[![Total Downloads](https://img.shields.io/packagist/dt/awesome-packages/simple-routes?style=flat-square)](https://packagist.org/packages/awesome-packages/simple-routes)
-![Size](https://img.shields.io/github/languages/code-size/awesome-packages/simple-routes?style=flat-square)
-[![codecov.io](https://img.shields.io/codecov/c/github/awesome-packages/simple-routes?style=flat-square)](https://codecov.io/github/awesome-packages/simple-routes?branch=master)
-[![travis-ci](https://img.shields.io/travis/awesome-packages/simple-routes?style=flat-square)](https://travis-ci.com/github/awesome-packages/simple-routes)
-[![Issues](https://img.shields.io/github/issues/awesome-packages/simple-routes?style=flat-square)](https://github.com/awesome-packages/simple-routes/issues)
-[![Pull Request's](https://img.shields.io/github/issues-pr/awesome-packages/simple-routes?style=flat-square)](https://github.com/awesome-packages/simple-routes/pulls)
+[![Total Downloads](https://img.shields.io/packagist/dt/awesome-packages/awesome-routes?style=flat-square)](https://packagist.org/packages/awesome-packages/awesome-routes)
+![Size](https://img.shields.io/github/languages/code-size/awesome-packages/awesome-routes?style=flat-square)
+[![codecov.io](https://img.shields.io/codecov/c/github/awesome-packages/awesome-routes?style=flat-square)](https://codecov.io/github/awesome-packages/awesome-routes?branch=master)
+[![travis-ci](https://img.shields.io/travis/awesome-packages/awesome-routes?style=flat-square)](https://travis-ci.com/github/awesome-packages/awesome-routes)
+[![Issues](https://img.shields.io/github/issues/awesome-packages/awesome-routes?style=flat-square)](https://github.com/awesome-packages/awesome-routes/issues)
+[![Pull Request's](https://img.shields.io/github/issues-pr/awesome-packages/awesome-routes?style=flat-square)](https://github.com/awesome-packages/awesome-routes/pulls)
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
 </a>
@@ -14,7 +14,7 @@
 
 To install the package use the command below
 
-`composer require awesome-packages/simple-routes`
+`composer require awesome-packages/awesome-routes`
 
 ## How to use
 
@@ -23,7 +23,7 @@ The library uses the RESTFUL API concept , example:
 ```php
 <?php
 
-$router = new \SimpleRoutes\Router();
+$router = new \AwesomeRoutes\Router();
 
 $router->get('/user', \Mocks\UserController::class, 'index');
 $router->get('/user/:id', \Mocks\UserController::class, 'index');
@@ -62,7 +62,7 @@ There is also the resource method that creates the routes according to the table
 ```php
 <?php
 
-$router = new \SimpleRoutes\Router();
+$router = new \AwesomeRoutes\Router();
 
 $router->resource('/user', \Mocks\UserController::class);
 
@@ -79,4 +79,4 @@ echo $router->handleRequest();
 
 ## License
 
-[MIT](LICENSE) &copy; SimpleRoutes
+[MIT](LICENSE) &copy; AwesomeRoutes

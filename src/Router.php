@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleRoutes;
+namespace AwesomeRoutes;
 
 use Exception;
-use SimpleRoutes\Enum\StatusCode;
-use SimpleRoutes\RequestMethodsHandler\DeleteRequestMethodHandler;
-use SimpleRoutes\RequestMethodsHandler\GetRequestMethodHandler;
-use SimpleRoutes\RequestMethodsHandler\PostRequestMethodHandler;
-use SimpleRoutes\RequestMethodsHandler\PutRequestMethodHandler;
+use AwesomeRoutes\Enum\StatusCode;
+use AwesomeRoutes\RequestMethodsHandler\DeleteRequestMethodHandler;
+use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
+use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
+use AwesomeRoutes\RequestMethodsHandler\PutRequestMethodHandler;
 
 final class Router
 {

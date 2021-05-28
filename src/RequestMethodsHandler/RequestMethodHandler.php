@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleRoutes\RequestMethodsHandler;
+namespace AwesomeRoutes\RequestMethodsHandler;
 
 interface RequestMethodHandler
 {
