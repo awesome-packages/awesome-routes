@@ -1,4 +1,4 @@
-![awesome-routes](https://socialify.git.ci/awesome-packages/awesome-routes/image?description=1&font=Raleway&owner=1&theme=Dark)
+![awesome-routes](https://socialify.git.ci/awesome-packages/awesome-routes/image?description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F84918258%3Fv%3D4&owner=1&pulls=1&stargazers=1&theme=Dark)
 
 [![Total Downloads](https://img.shields.io/packagist/dt/awesome-packages/awesome-routes?style=flat-square)](https://packagist.org/packages/awesome-packages/awesome-routes)
 ![Size](https://img.shields.io/github/languages/code-size/awesome-packages/awesome-routes?style=flat-square)
