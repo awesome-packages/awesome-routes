@@ -121,14 +121,14 @@ final class RouterTest extends TestCase
         $_SERVER["REQUEST_METHOD"] = 'GET';
         $_SERVER['REQUEST_URI'] = '/user';
 
-        $response = $router->handleRequest();
+        $router->handleRequest();
 
         $expectedResponse = json_encode([
             ['name' => 'Rhuan Gabriel', 'age' => 23],
             ['name' => 'Eloah Hadassa', 'age' => 13]
         ]);
 
-        Assert::assertEquals($expectedResponse, $response);
+        $this->expectOutputString($expectedResponse);
     }
 
     public function testRouter_GivenGetRequestMethodForProductRout_UsingHandleRequestMethodAndProductRoutNotDefined_ShouldThrowException(): void
@@ -139,11 +139,11 @@ final class RouterTest extends TestCase
         $_SERVER["REQUEST_METHOD"] = 'GET';
         $_SERVER['REQUEST_URI'] = '/product';
 
-        $response = $router->handleRequest();
+        $router->handleRequest();
 
         $expectedResponse = json_encode('Route not found.');
 
-        Assert::assertEquals($expectedResponse, $response);
+        $this->expectOutputString($expectedResponse);
     }
 
     public function testRouter_GivenGetRequestMethodForUserRout_WithUserRoutNotDefined_ShouldThrowException(): void
