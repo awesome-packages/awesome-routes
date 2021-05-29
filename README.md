@@ -30,7 +30,7 @@ $router->get('/user', new \Mocks\UserController(), 'index');
 $router->get('/user/:id', new \Mocks\UserController(), 'show');
 $router->post('/user', new \Mocks\UserController(), 'create');
 $router->put('/user/:id', new \Mocks\UserController(), 'update');
-$router->delete('/user/:id', new \Mocks\UserController(), 'delete');
+$router->delete('/user/:id', new \Mocks\UserController(), 'destroy');
 
 $router->handleRequest();
 ```
@@ -140,7 +140,7 @@ $router->handleRequest();
 | GET            | /user/{id} | show              |
 | POST           | /user      | create            |
 | PUT            | /user/{id} | update            |
-| DELETE         | /user/{id} | delete            |
+| DELETE         | /user/{id} | destroy           |
 
 ## License
 
