@@ -2,6 +2,7 @@
 
 namespace AwesomeRoutesTests\RequestMethodsHandler;
 
+use AwesomeRoutes\Core\Request;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use AwesomeRoutes\Enum\StatusCode;
@@ -14,19 +15,15 @@ final class DeleteRequestMethodHandlerTest extends TestCase
     {
         $deleteRequestMethod = new DeleteRequestMethodHandler();
 
-        $response = $deleteRequestMethod->exec(
+        $response = $deleteRequestMethod->handler(
             $requestMethod = 'DELETE',
-            $requestURI = ['id' => 1],
-            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'delete'],
-            null
+            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'destroy'],
+            new Request([], 1)
         );
 
-        $expectedResponse = [
-            'status' => StatusCode::SUCCESS,
-            'message' => "User with id 1, has deleted."
-        ];
+        $expectedResponse = ['id' => 1];
 
-        Assert::assertEquals($expectedResponse, $response);
+        Assert::assertEquals($expectedResponse, $response->body);
     }
 
     public function testDeleteRequestMethod_GivenRequestMethodThatCanNotHandler_WithNextRequestMethodCanHandlerRequest_ShouldSuccessfulMessage(): void
@@ -34,11 +31,10 @@ final class DeleteRequestMethodHandlerTest extends TestCase
         $deleteRequestMethod = (new DeleteRequestMethodHandler())
             ->setNextRequestMethodHandler(new GetRequestMethodHandler());
 
-        $response = $deleteRequestMethod->exec(
+        $response = $deleteRequestMethod->handler(
             $requestMethod = 'GET',
-            $requestURI = ['id' => null],
             $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'index'],
-            null
+            new Request([], null)
         );
 
         $expectedResponse = [
@@ -46,7 +42,7 @@ final class DeleteRequestMethodHandlerTest extends TestCase
             ['name' => 'Eloah Hadassa', 'age' => 13]
         ];
 
-        Assert::assertEquals($expectedResponse, $response);
+        Assert::assertEquals($expectedResponse, $response->body);
     }
 
     public function testDeleteRequestMethod_GivenRequestMethodThatNotCanHandler_ShouldThrowException(): void
@@ -55,12 +51,10 @@ final class DeleteRequestMethodHandlerTest extends TestCase
         $this->expectExceptionMessage('Method not supported');
         $this->expectExceptionCode(StatusCode::NOT_FOUND);
 
-        $deleteRequestMethod = new DeleteRequestMethodHandler();
-        $deleteRequestMethod->exec(
+        $response = (new DeleteRequestMethodHandler())->handler(
             $requestMethod = 'GET',
-            $requestURI = ['id' => 1],
-            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'delete'],
-            null
+            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'index'],
+            new Request([], 1)
         );
     }
 }

@@ -2,11 +2,12 @@
 
 namespace AwesomeRoutesTests\RequestMethodsHandler;
 
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\TestCase;
+use AwesomeRoutes\Core\Request;
 use AwesomeRoutes\Enum\StatusCode;
 use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
 use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
 final class PostRequestMethodHandlerTest extends TestCase
 {
@@ -14,20 +15,13 @@ final class PostRequestMethodHandlerTest extends TestCase
     {
         $postRequestMethod = new PostRequestMethodHandler();
 
-        $response = $postRequestMethod->exec(
+        $response = $postRequestMethod->handler(
             $requestMethod = 'POST',
-            $requestURI = [],
             $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'create'],
-            $requestBody = ['name' => 'rhuangabriel']
+            new Request($requestBody = ['name' => 'rhuangabriel'], null)
         );
 
-        $expectedResponse = [
-            'status' => StatusCode::CREATED,
-            'message' => "User has created.",
-            'user' => $requestBody
-        ];
-
-        Assert::assertEquals($expectedResponse, $response);
+        Assert::assertEquals($requestBody, $response->body);
     }
 
     public function testDeleteRequestMethod_GivenRequestMethodThatCanNotHandler_WithNextRequestMethodCanHandlerRequest_ShouldSuccessfulMessage(): void
@@ -35,11 +29,10 @@ final class PostRequestMethodHandlerTest extends TestCase
         $deleteRequestMethod = (new PostRequestMethodHandler())
             ->setNextRequestMethodHandler(new GetRequestMethodHandler());
 
-        $response = $deleteRequestMethod->exec(
+        $response = $deleteRequestMethod->handler(
             $requestMethod = 'GET',
-            $requestURI = ['id' => null],
             $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'index'],
-            null
+            new Request([], 1)
         );
 
         $expectedResponse = [
@@ -47,7 +40,7 @@ final class PostRequestMethodHandlerTest extends TestCase
             ['name' => 'Eloah Hadassa', 'age' => 13]
         ];
 
-        Assert::assertEquals($expectedResponse, $response);
+        Assert::assertEquals($expectedResponse, $response->body);
     }
 
     public function testDeleteRequestMethod_GivenRequestMethodThatNotCanHandler_ShouldThrowException(): void
@@ -57,11 +50,10 @@ final class PostRequestMethodHandlerTest extends TestCase
         $this->expectExceptionCode(StatusCode::NOT_FOUND);
 
         $postRequestMethod = new PostRequestMethodHandler();
-        $postRequestMethod->exec(
+        $postRequestMethod->handler(
             $requestMethod = 'GET',
-            $requestURI = [],
-            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'create'],
-            $requestBody = ['name' => 'rhuangabriel']
+            $controllerReference = ['namespace' => '\Mocks\UserController', 'method' => 'index'],
+            new Request([], 1)
         );
     }
 }
