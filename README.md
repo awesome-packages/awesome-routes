@@ -3,13 +3,14 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/awesome-packages/awesome-routes?style=flat-square)](https://packagist.org/packages/awesome-packages/awesome-routes)
 ![Size](https://img.shields.io/github/languages/code-size/awesome-packages/awesome-routes?style=flat-square)
 [![codecov.io](https://img.shields.io/codecov/c/github/awesome-packages/awesome-routes?style=flat-square)](https://codecov.io/github/awesome-packages/awesome-routes?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/awesome-packages/awesome-routes/badge)](https://www.codefactor.io/repository/github/awesome-packages/awesome-routes)
 [![travis-ci](https://img.shields.io/travis/awesome-packages/awesome-routes?style=flat-square)](https://travis-ci.com/github/awesome-packages/awesome-routes)
 [![Issues](https://img.shields.io/github/issues/awesome-packages/awesome-routes?style=flat-square)](https://github.com/awesome-packages/awesome-routes/issues)
 [![Pull Request's](https://img.shields.io/github/issues-pr/awesome-packages/awesome-routes?style=flat-square)](https://github.com/awesome-packages/awesome-routes/pulls)
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
 </a>
-
+  
 ## How to install
 
 To install the package use the command below
