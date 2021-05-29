@@ -1,6 +1,6 @@
 /vendor
 /.idea
 
+/docker
 docker-compose.yml
-Dockerfile
 .phpunit.result.cache

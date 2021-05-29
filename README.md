@@ -25,35 +25,100 @@ The library uses the RESTFUL API concept , example:
 
 $router = new \AwesomeRoutes\Router();
 
-$router->get('/user', \Mocks\UserController::class, 'index');
-$router->get('/user/:id', \Mocks\UserController::class, 'index');
-$router->post('/user', \Mocks\UserController::class, 'create');
-$router->put('/user/:id', \Mocks\UserController::class, 'update');
-$router->delete('/user/:id', \Mocks\UserController::class, 'delete');
+$router->get('/user', new \Mocks\UserController(), 'index');
+$router->get('/user/:id', new \Mocks\UserController(), 'show');
+$router->post('/user', new \Mocks\UserController(), 'create');
+$router->put('/user/:id', new \Mocks\UserController(), 'update');
+$router->delete('/user/:id', new \Mocks\UserController(), 'delete');
 
-echo $router->handleRequest();
+$router->handleRequest();
 ```
 
 If you send a request of type GET to route /user, the index method of the UserController class will be called.
 
-If you send a request of type GET to route /user/1, the id will be passed as a parameter to the index method.
+If you send a request of type GET to route /user/1, the id will be passed as a parameter to the show method.
 
-In the case of the POST request for route /user, all attributes that you pass in the body of the request will be sent as a parameter to the create method.
+In the case of the POST request for route /user, all attributes that you pass in the body of the request will be sent as
+a parameter to the create method.
 
-As well as for other methods. an example of a controller:
+As well as for other methods. An example of a controller:
 
 ```php
 <?php
 
-class UserController
+use AwesomeRoutes\Core\Controller;
+use AwesomeRoutes\Core\Request;
+use AwesomeRoutes\Core\Response;
+use AwesomeRoutes\Enum\StatusCode;
+
+class UserController implements Controller
 {
-    public function index(?int $id): void { }
+      public function index(Request $request,Response $response) : Response
+      {
+          $response->setBody([
+              ['name' => 'Rhuan Gabriel', 'age' => 23],
+              ['name' => 'Eloah Hadassa', 'age' => 13]
+          ]);
 
-    public function create(array $requestBody): void { }
+          $response->setStatusCode(StatusCode::SUCCESS);
 
-    public function update(int $id, array $requestBody): void { }
-
-    public function delete(int $id): void { }
+          return $response;
+      }
+      
+      public function show(Request $request,Response $response) : Response
+      {
+          $id = $request->id;
+      
+          $response->setBody([
+              'name' => 'Rhuan Gabriel',
+              'age' => 23
+          ]);
+  
+          $response->setStatusCode(StatusCode::SUCCESS);
+  
+          return $response;
+      }
+      
+      public function create(Request $request,Response $response) : Response
+      {
+          $id = $request->id;
+          $body = $request->body;
+          
+          $response->setBody([
+              'message' => 'User was created'
+          ]);
+          
+          $response->setStatusCode(StatusCode::CREATED);
+  
+          return $response;
+      }
+      
+      public function update(Request $request,Response $response) : Response
+      {
+          $id = $request->id;
+          $body = $request->body;
+      
+          $response->setBody([
+              'message' => 'User has been updated'
+          ]);
+          
+          $response->setStatusCode(StatusCode::SUCCESS);
+  
+          return $response;
+      }
+      
+      public function destroy(Request $request,Response $response) : Response
+      {
+          $id = $request->id;
+          
+          $response->setBody([
+              'message' => 'User has been deleted'
+          ]);
+          
+          $response->setStatusCode(StatusCode::SUCCESS);
+  
+          return $response;
+      }
 }
 ```
 
@@ -64,15 +129,14 @@ There is also the resource method that creates the routes according to the table
 
 $router = new \AwesomeRoutes\Router();
 
-$router->resource('/user', \Mocks\UserController::class);
-
-echo $router->handleRequest();
+$router->resource('/user', new \Mocks\UserController());
+$router->handleRequest();
 ```
-
 
 | Request Method | Route      | Controller Method |
 |----------------|------------|-------------------|
 | GET            | /user      | index             |
+| GET            | /user/{id} | show              |
 | POST           | /user      | create            |
 | PUT            | /user/{id} | update            |
 | DELETE         | /user/{id} | delete            |

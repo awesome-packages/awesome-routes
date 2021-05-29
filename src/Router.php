@@ -2,18 +2,21 @@
 
 namespace AwesomeRoutes;
 
-use Exception;
+use AwesomeRoutes\Core\Controller;
+use AwesomeRoutes\Core\Request;
+use AwesomeRoutes\Core\Response;
 use AwesomeRoutes\Enum\StatusCode;
 use AwesomeRoutes\RequestMethodsHandler\DeleteRequestMethodHandler;
 use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
 use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
 use AwesomeRoutes\RequestMethodsHandler\PutRequestMethodHandler;
+use Exception;
 
 final class Router
 {
     private array $routes = [];
 
-    public function get(string $uri, string $class, string $method): void
+    public function get(string $uri, Controller $class, string $method): void
     {
         $idReference = array_filter(explode('/', $uri), function ($item) {
             return $item === ':id' ?? 0;
@@ -26,7 +29,7 @@ final class Router
         ];
     }
 
-    public function post(string $uri, string $class, string $method): void
+    public function post(string $uri, Controller $class, string $method): void
     {
         $this->routes['POST'][$uri] = [
             'namespace' => $class,
@@ -34,7 +37,7 @@ final class Router
         ];
     }
 
-    public function put(string $uri, string $class, string $method): void
+    public function put(string $uri, Controller $class, string $method): void
     {
         $idReference = array_filter(explode('/', $uri), function ($item) {
             return $item === ':id' ?? 0;
@@ -47,7 +50,7 @@ final class Router
         ];
     }
 
-    public function delete(string $uri, string $class, string $method): void
+    public function delete(string $uri, Controller $class, string $method): void
     {
         $idReference = array_filter(explode('/', $uri), function ($item) {
             return $item === ':id' ?? 0;
@@ -60,7 +63,7 @@ final class Router
         ];
     }
 
-    public function resource(string $uri, string $class): void
+    public function resource(string $uri, Controller $class): void
     {
 
         $this->routes['GET'][$uri] = [
@@ -87,43 +90,13 @@ final class Router
 
         $this->routes['DELETE'][$uri . '/:id'] = [
             'namespace' => $class,
-            'method' => 'delete',
+            'method' => 'destroy',
             'idKey' => 2
         ];
     }
 
-    /**
-     * @param string $requestMethod
-     * @param string $requestURI
-     * @param ?array $requestBody
-     *
-     * @return array
-     *
-     * @throws Exception
-     */
-    public function dispatch(string $requestMethod, string $requestURI, ?array $requestBody = []): array
-    {
-        $endpoint = $this->prepareRequestURIForHandleRequest($requestURI);
-
-        $registeredRoutes = $this->getRegisteredRoutesByRequestMethodOrCry($requestMethod);
-        $controllerReference = $this->getControllerReferenceOrCry($registeredRoutes, $endpoint);
-
-        $requestParams = self::generateRequestParams($requestURI, $controllerReference);
-
-        $requestMethodHandler = (new GetRequestMethodHandler())
-            ->setNextRequestMethodHandler((new PostRequestMethodHandler())
-                ->setNextRequestMethodHandler((new PutRequestMethodHandler())
-                    ->setNextRequestMethodHandler((new DeleteRequestMethodHandler()))));
-
-        return $requestMethodHandler->exec(
-            $requestMethod,
-            $requestParams,
-            $controllerReference,
-            $requestBody);
-    }
-
-    /** @return string */
-    public function handleRequest(): string
+    /** @return void */
+    public function handleRequest(): void
     {
         try {
             $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -131,10 +104,60 @@ final class Router
             $requestBody = json_decode(file_get_contents('php://input'), true);
 
             $response = $this->dispatch($requestMethod, $requestURI, $requestBody);
-            return json_encode($response);
+
+            http_response_code($response->statusCode);
+            echo json_encode($response->body);
         } catch (Exception $exception) {
-            return json_encode($exception->getMessage());
+            echo json_encode($exception->getMessage());
         }
+    }
+
+    /**
+     * @param string $requestMethod
+     * @param string $requestURI
+     * @param ?array $requestBody
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
+    public function dispatch(string $requestMethod, string $requestURI, ?array $requestBody = []): Response
+    {
+        $endpoint = $this->prepareRequestURIForHandleRequest($requestURI);
+
+        $registeredRoutes = $this->getRegisteredRoutesByRequestMethodOrCry($requestMethod);
+        $controllerReference = $this->getControllerReferenceOrCry($registeredRoutes, $endpoint);
+
+        $requestParams = self::generateRequestParams($requestURI, $controllerReference, $requestBody);
+
+        $requestMethodHandler = (new GetRequestMethodHandler())
+            ->setNextRequestMethodHandler((new PostRequestMethodHandler())
+                ->setNextRequestMethodHandler((new PutRequestMethodHandler())
+                    ->setNextRequestMethodHandler((new DeleteRequestMethodHandler()))));
+
+        return $requestMethodHandler->handler(
+            $requestMethod,
+            $controllerReference,
+            $requestParams);
+    }
+
+    /**
+     * @param string $requestURI
+     * @return string
+     *
+     * @throws \Exception
+     */
+    private function prepareRequestURIForHandleRequest(string $requestURI): string
+    {
+        $explodedRequestURI = explode('/', $requestURI);
+
+        if (count($explodedRequestURI) > 2) {
+            return implode('/', array_map(function ($item) {
+                return is_numeric($item) ? ':id' : $item;
+            }, $explodedRequestURI));
+        }
+
+        return $requestURI;
     }
 
     /**
@@ -168,29 +191,10 @@ final class Router
         throw new Exception($message = 'Route not found.', $code = StatusCode::NOT_FOUND);
     }
 
-    /**
-     * @param string $requestURI
-     * @return string
-     *
-     * @throws \Exception
-     */
-    private function prepareRequestURIForHandleRequest(string $requestURI): string
-    {
-        $explodedRequestURI = explode('/', $requestURI);
-
-        if (count($explodedRequestURI) > 2) {
-            return implode('/', array_map(function($item) {
-                return is_numeric($item) ? ':id' : $item;
-            }, $explodedRequestURI));
-        }
-
-        return $requestURI;
-    }
-
-    private static function generateRequestParams(string $requestURI, array $controllerReference): array
+    private static function generateRequestParams(string $requestURI, array $controllerReference, ?array $requestBody): Request
     {
         if (!isset($controllerReference['idKey']) || is_null($controllerReference['idKey'])) {
-            return ['id' => null];
+            return new Request($requestBody, null);
         }
 
         $explodedRequestURI = explode('/', $requestURI);
@@ -199,6 +203,6 @@ final class Router
             ? intval($explodedRequestURI[$controllerReference['idKey']])
             : $explodedRequestURI[$controllerReference['idKey']];
 
-        return ['id' => $value];
+        return new Request($requestBody, $value);
     }
 }
