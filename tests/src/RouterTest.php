@@ -1,9 +1,9 @@
 <?php
 
-namespace AwesomeRoutesTests;
+namespace AwesomePackages\AwesomeRoutesTests;
 
-use AwesomeRoutes\Enum\StatusCode;
-use AwesomeRoutes\Router;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\Router;
 use Mocks\UserController;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;

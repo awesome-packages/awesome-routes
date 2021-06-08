@@ -23,7 +23,7 @@ The library uses the RESTFUL API concept , example:
 ```php
 <?php
 
-$router = new \AwesomeRoutes\Router();
+$router = new \AwesomePackages\AwesomeRoutes\Router();
 
 $router->get('/user', new \Mocks\UserController(), 'index');
 $router->get('/user/:id', new \Mocks\UserController(), 'show');
@@ -46,10 +46,10 @@ As well as for other methods. An example of a controller:
 ```php
 <?php
 
-use AwesomeRoutes\Core\Controller;
-use AwesomeRoutes\Core\Request;
-use AwesomeRoutes\Core\Response;
-use AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\Core\Controller;
+use AwesomePackages\AwesomeRoutes\Core\Request;
+use AwesomePackages\AwesomeRoutes\Core\Response;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
 
 class UserController implements Controller
 {
@@ -127,7 +127,7 @@ There is also the resource method that creates the routes according to the table
 ```php
 <?php
 
-$router = new \AwesomeRoutes\Router();
+$router = new \AwesomePackages\AwesomeRoutes\Router();
 
 $router->resource('/user', new \Mocks\UserController());
 $router->handleRequest();

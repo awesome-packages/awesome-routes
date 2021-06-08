@@ -1,11 +1,11 @@
 <?php
 
-namespace AwesomeRoutesTests\RequestMethodsHandler;
+namespace AwesomePackages\AwesomeRoutesTests\RequestMethodsHandler;
 
-use AwesomeRoutes\Core\Request;
-use AwesomeRoutes\Enum\StatusCode;
-use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
-use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\Core\Request;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
