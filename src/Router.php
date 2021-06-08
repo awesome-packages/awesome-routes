@@ -1,15 +1,15 @@
 <?php
 
-namespace AwesomeRoutes;
+namespace AwesomePackages\AwesomeRoutes;
 
-use AwesomeRoutes\Core\Controller;
-use AwesomeRoutes\Core\Request;
-use AwesomeRoutes\Core\Response;
-use AwesomeRoutes\Enum\StatusCode;
-use AwesomeRoutes\RequestMethodsHandler\DeleteRequestMethodHandler;
-use AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
-use AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
-use AwesomeRoutes\RequestMethodsHandler\PutRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\Core\Controller;
+use AwesomePackages\AwesomeRoutes\Core\Request;
+use AwesomePackages\AwesomeRoutes\Core\Response;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\DeleteRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\GetRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\PostRequestMethodHandler;
+use AwesomePackages\AwesomeRoutes\RequestMethodsHandler\PutRequestMethodHandler;
 use Exception;
 
 final class Router

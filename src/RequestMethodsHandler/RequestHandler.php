@@ -1,10 +1,10 @@
 <?php
 
-namespace AwesomeRoutes\RequestMethodsHandler;
+namespace AwesomePackages\AwesomeRoutes\RequestMethodsHandler;
 
-use AwesomeRoutes\Core\Request;
-use AwesomeRoutes\Core\Response;
-use AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\Core\Request;
+use AwesomePackages\AwesomeRoutes\Core\Response;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
 use Exception;
 use ReflectionException;
 use ReflectionMethod;

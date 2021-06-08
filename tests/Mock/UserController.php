@@ -2,18 +2,18 @@
 
 namespace Mocks;
 
-use AwesomeRoutes\Core\Controller;
-use AwesomeRoutes\Core\Request;
-use AwesomeRoutes\Core\Response;
-use AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\Core\Controller;
+use AwesomePackages\AwesomeRoutes\Core\Request;
+use AwesomePackages\AwesomeRoutes\Core\Response;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
 
 final class UserController implements Controller
 {
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function index(Request $request, Response $response): Response
     {
@@ -28,10 +28,10 @@ final class UserController implements Controller
     }
 
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function show(Request $request, Response $response): Response
     {
@@ -46,10 +46,10 @@ final class UserController implements Controller
     }
 
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function create(Request $request, Response $response): Response
     {
@@ -60,10 +60,10 @@ final class UserController implements Controller
     }
 
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function update(Request $request, Response $response): Response
     {
@@ -74,10 +74,10 @@ final class UserController implements Controller
     }
 
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function destroy(Request $request, Response $response): Response
     {
@@ -91,10 +91,10 @@ final class UserController implements Controller
     }
 
     /**
-     * @param \AwesomeRoutes\Core\Request $request
-     * @param \AwesomeRoutes\Core\Response $response
+     * @param \AwesomePackages\AwesomeRoutes\Core\Request $request
+     * @param \AwesomePackages\AwesomeRoutes\Core\Response $response
      *
-     * @return \AwesomeRoutes\Core\Response
+     * @return \AwesomePackages\AwesomeRoutes\Core\Response
      */
     public function findNameById(Request $request, Response $response): Response
     {

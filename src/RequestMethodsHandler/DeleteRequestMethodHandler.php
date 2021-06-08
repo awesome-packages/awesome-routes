@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeRoutes\RequestMethodsHandler;
+namespace AwesomePackages\AwesomeRoutes\RequestMethodsHandler;
 
 final class DeleteRequestMethodHandler extends RequestHandler
 {

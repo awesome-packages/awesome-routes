@@ -1,8 +1,8 @@
 <?php
 
-namespace AwesomeRoutes\Core;
+namespace AwesomePackages\AwesomeRoutes\Core;
 
-use AwesomeRoutes\Enum\StatusCode;
+use AwesomePackages\AwesomeRoutes\Enum\StatusCode;
 
 class Response
 {

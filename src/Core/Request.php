@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeRoutes\Core;
+namespace AwesomePackages\AwesomeRoutes\Core;
 
 class Request
 {
